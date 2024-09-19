@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.weatherApplication.R
 import com.example.weatherApplication.commonUtils.formatDate
@@ -31,7 +32,16 @@ class WeatherDetailFragment : Fragment() {
         viewBinding?.viewModel = viewModel
         viewModel.setWeatherDetail(args.weatherDetailEntity)
         setWeatherDetail()
+        initListener()
         return viewBinding?.root
+    }
+
+    private fun initListener() {
+        viewBinding?.apply {
+            bvBack.setOnClickListener {
+                findNavController().popBackStack()
+            }
+        }
     }
 
     private fun setWeatherDetail() {
@@ -39,7 +49,7 @@ class WeatherDetailFragment : Fragment() {
         val list = mutableListOf<WeatherDetailUIModel>()
         val response = args.weatherDetailEntity.list.groupBy { getDayDetail(it.dtTxt) }
         response.onEachIndexed { index, entry ->
-            if(index!= 0) {
+            if (index != 0) {
                 val detail = entry.value.first()
                 list.add(
                     WeatherDetailUIModel(
@@ -56,8 +66,7 @@ class WeatherDetailFragment : Fragment() {
         viewBinding?.rvWeatherList?.adapter = weatherDetailAdaptor
     }
 
-    private fun getDayDetail(date: String) =
-        date.formatDate().orEmpty()
+    private fun getDayDetail(date: String) = date.formatDate().orEmpty()
 
     private fun getWeatherIcon(info: String): Int {
         return when (info) {

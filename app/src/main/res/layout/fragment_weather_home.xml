@@ -9,6 +9,9 @@
         <variable
             name="viewModel"
             type="com.example.weatherApplication.ui.WeatherHomeViewModel" />
+        <variable
+            name="fragment"
+            type="com.example.weatherApplication.ui.WeatherHomeFragment" />
 
     </data>
 
@@ -53,23 +56,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_weather_forecasts" />
 
-        <Button
-            android:id="@+id/bv_history"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:onClickListener="@{() -> viewModel.fetchHistory()}"
-            android:text="@string/check_history"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_city" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_history_detail"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="25dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/bv_history" />
+            app:layout_constraintTop_toBottomOf="@id/bv_search" />
 
         <ProgressBar
             android:id="@+id/progress_bar"
@@ -86,7 +79,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:onClickListener="@{() -> viewModel.removeDetails()}"
+            android:onClickListener="@{() -> fragment.removeDetails()}"
+            android:visibility="@{viewModel.historyDetails.size()&lt;1? View.GONE :View.VISIBLE}"
             android:text="@string/clear_history"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rv_history_detail" />

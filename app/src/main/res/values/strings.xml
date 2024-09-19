@@ -13,4 +13,6 @@
     <string name="wind_speed">"Wind Speed : %s km/h"</string>
     <string name="weather_description">"Weather Description : %s"</string>
     <string name="weather_detail">5 day Weather Detail</string>
+    <string name="back">Back</string>
+    <string name="today">Today\'s Weather Detail</string>
 </resources>

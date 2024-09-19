@@ -18,7 +18,7 @@ class WeatherHomeViewModel @Inject constructor(private val weatherUseCase: Weath
 
     val weatherDetailResponse = SingleLiveEvent<WeatherDetailEntity?>()
     val error = SingleLiveEvent<String>()
-    val historyDetails = SingleLiveEvent<List<String>>()
+    val historyDetails = MutableLiveData<List<String>>()
     val isDataLoading = MutableLiveData(false)
     val name = MutableLiveData<String>()
 
@@ -28,6 +28,7 @@ class WeatherHomeViewModel @Inject constructor(private val weatherUseCase: Weath
                 weatherUseCase.fetchWeatherDetails(name).collect { response ->
                     isDataLoading.postValue(response.isLoading())
                     response.onSuccess {
+                        fetchHistory()
                         weatherDetailResponse.postValue(response.data)
                     }.onError {
                         error.postValue(response.error?.errorMessage)

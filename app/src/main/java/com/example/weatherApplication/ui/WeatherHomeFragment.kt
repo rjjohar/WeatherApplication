@@ -30,6 +30,7 @@ class WeatherHomeFragment : Fragment() {
             inflater, R.layout.fragment_weather_home, container, false
         )
         viewBinding?.viewModel = viewModel
+        viewBinding?.fragment = this
         setHistoryDetail()
         initObservers()
         return viewBinding?.root
@@ -51,6 +52,11 @@ class WeatherHomeFragment : Fragment() {
                 )
             }
         }
+    }
+
+    fun removeDetails(){
+        viewBinding?.bvClearHistory?.visibility = View.GONE
+        viewModel.removeDetails()
     }
 
     private fun setHistoryDetail() {
