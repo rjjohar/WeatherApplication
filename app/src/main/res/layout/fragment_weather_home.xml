@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.example.weatherApplication.ui.WeatherHomeViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tv_weather_forecasts"
+            style="@style/TextAppearance.Material3.BodyLarge"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="25dp"
+            android:gravity="center_horizontal"
+            android:text="@string/weather_forecasts"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_city"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/et_city"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:drawablePadding="10dp"
+            android:hint="@string/enter_city_name"
+            android:maxLines="1"
+            android:text="@={viewModel.name}"
+            app:layout_constraintEnd_toStartOf="@id/bv_search"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_weather_forecasts" />
+
+        <Button
+            android:id="@+id/bv_search"
+            style="@style/Widget.MaterialComponents.TimePicker.ImageButton"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:enabled="@{!viewModel.name.empty}"
+            android:onClickListener="@{() ->viewModel.fetchWeatherDetails(viewModel.name)}"
+            android:text="@string/search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_weather_forecasts" />
+
+        <Button
+            android:id="@+id/bv_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:onClickListener="@{() -> viewModel.fetchHistory()}"
+            android:text="@string/check_history"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_city" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_history_detail"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="25dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/bv_history" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:visibility="@{viewModel.isDataLoading() ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/bv_clear_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:onClickListener="@{() -> viewModel.removeDetails()}"
+            android:text="@string/clear_history"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_history_detail" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

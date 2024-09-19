@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">WeatherA</string>
+    <string name="weather_forecasts">Weather Forecasts</string>
+    <string name="check_history"> Check History </string>
+    <string name="clear_history"> Clear History </string>
+    <string name="enter_city_name">Enter City Name</string>
+    <string name="something_went_wrong">Something went wrong.</string>
+    <string name="weather_details">Weather Details</string>
+    <string name="search">Search</string>
+    <string name="delete_all">Delete All</string>
+    <string name="temperature">"Temperature : %s °C"</string>
+    <string name="humidity">"Humidity : %s %%"</string>
+    <string name="wind_speed">"Wind Speed : %s km/h"</string>
+    <string name="weather_description">"Weather Description : %s"</string>
+    <string name="weather_detail">5 day Weather Detail</string>
+</resources>
