@@ -7,9 +7,9 @@ temperature, humidity, wind speed, and weather description
 
 # Screenshots
 
-<img width="298" alt="image" src="https://github.com/user-attachments/assets/6e31cfff-ae8b-4164-8e2f-1cad4d6c4ea3">
+<img width="298" alt="image" src="https://github.com/user-attachments/assets/47f49896-9545-46a8-8764-5bae42b729fd">
+<img width="294" alt="image" src="https://github.com/user-attachments/assets/7f221035-d69f-45c3-9fb0-14cf3480d8bf">
 
-<img width="297" alt="image" src="https://github.com/user-attachments/assets/1ab2603c-63d6-491b-815e-fecdc5a9700a">
 
 # Features
 - Shows the weather forecast, including temperature, humidity, and conditions.
